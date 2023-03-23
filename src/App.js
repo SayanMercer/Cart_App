@@ -106,7 +106,7 @@ getCartTotal = () => {
          onDecreaseQuantity={this.handleDecreaseQuantity}
          onDeleteProduct={this.handleDeleteProduct}
        />
-       <div  style={{fontSize: 20, padding:10 }}>
+       <div  style={{fontSize: 20, color:'blue',padding: 10, border:1  , padding:10 }}>
         TOTAL : {this.getCartTotal()}
        </div>
       </div>

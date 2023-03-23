@@ -15,6 +15,7 @@ const CartItem = (props) => {
      } = props;
      
     return (
+    //  <div className="main">
       <div className="cart-item">  
         
         <div className="left-block">
@@ -47,6 +48,7 @@ const CartItem = (props) => {
           </div>
         </div>
       </div>
+    // </div> 
     );
   }
 
