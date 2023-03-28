@@ -1,118 +1,334 @@
 
 
-import React from 'react';
+// import React from 'react';
 
+// import Cart from './Cart';
+// import Navbar from './Navbar';
+// //import * as firebase from 'firebase';
+// import {
+//   doc,
+//   addDoc,
+//   setDoc,
+//   collection,
+//   updateDoc,
+//   deleteDoc,
+//   onSnapshot,
+//   query,
+//   where,
+//   orderBy,
+//   // doc,
+// } from "firebase/firestore";
+// import { db } from "./index";
+
+
+// class App extends React.Component {
+//   constructor() {
+//     super(); // this is used here because the constructor need to be called inside so that is ue super
+//     this.state = {
+//         products:[],
+//         loading : true
+//     }
+//     //this.db = firebase.firestore();
+    
+//     //this.increaseQuantity = this.increaseQuantity.bind(this);
+//     //this.testing();
+// }
+
+// // componentDidMount () {
+// //   firebase
+// //   .firestore()
+// //   .collection('products')
+// //   .get()
+// //   .then((snapshot) => {
+// //     console.log(snapshot);
+// //   })
+// // }
+
+// async componentDidMount() {
+//   //this is a realtime listener if you change anything in firebase ui will automatically updated 
+//      const q = query(
+//        collection(db, "products"),
+//        where("price", ">", 0),
+//        orderBy("price")
+//      );
+//      const unsub = await onSnapshot(q, (querySnapshot) => {
+//        const getProducts = [];
+//        querySnapshot.forEach((doc) => {
+//          const product = doc.data();
+//          product.id = doc.id;
+//          getProducts.push(product);
+//        });
+//        console.log(getProducts);
+//        this.setState({ products: getProducts, loading: false });
+//      });
+//    }
+
+// // handleIncreaseQuantity = (product) => {
+// //     console.log('hey please inc the qty of ',product);
+// //     const { products } = this.state;
+// //     const index = products.indexOf(product);
+
+// //     products[index].qty += 1;
+
+// //     this.setState({
+// //         products
+// //     })
+// // }
+// handleIncreaseQuantity = async (product) => {
+//   let { products } = this.state;
+//   const index = products.indexOf(product);
+
+//   const docRef = doc(collection(db, "products"), products[index].id);
+//   await updateDoc(docRef, {
+//     qty: products[index].qty + 1,
+//   });
+// };
+
+
+// // handleDecreaseQuantity = (product) => {
+// //     console.log('hey please inc the qty of ',product);
+// //     const { products } = this.state;
+// //     const index = products.indexOf(product);
+// //     if(products[index].qty === 0) {
+// //         return;
+// //     }
+// //     products[index].qty -= 1;
+
+// //     this.setState({
+// //         products
+// //     })
+// // }
+
+// handleDecreaseQuantity = async (product) => {
+//   let { products } = this.state;
+//   const index = products.indexOf(product);
+//   if (products[index].qty !== 0) {
+//     const docRef = doc(collection(db, "products"), products[index].id);
+//     await updateDoc(docRef, {
+//       qty: products[index].qty - 1,
+//     });
+//   }
+// };
+// handleDeleteProduct = (id) => {
+//     const { products } = this.state;
+//     const items = products.filter((item) => item.id !==id); //[{}]
+
+//     this.setState({
+//         products : items
+//     })
+// }
+// // handleOnDeleteProduct = (productToDelete) => {
+// //   const docRef = doc(collection(db, "products"), productToDelete);
+// //   deleteDoc(docRef)
+// //     .then(() => {
+// //       console.log("product deleted");
+// //     })
+// //     .catch((error) => {
+// //       console.log(error);
+// //     });
+// // };
+// getCartCount =() => {
+
+//   const {products} = this.state;
+//   let count = 0;
+  
+  
+
+//   products.forEach((product) => {
+//     count += product.qty;
+//   })
+//   return count ;
+// }
+// getCartTotal = () => {
+//   const {products} = this.state;
+//   let cartTotal = 0;
+//   products.map(product => {
+//     if(product.qty>0){
+//       cartTotal = cartTotal + product.qty * product.price ;
+//     }
+//     return '';
+   
+//   });
+
+//   return cartTotal;
+//  }
+// // addProduct = () => {
+// //   firebase
+// //    .firestore()
+// //    .collection
+// // }
+  
+//   render() {
+
+//     const { products, loading } = this.state;
+//     return (
+//      <div className="App">
+//        <Navbar count={this.getCartCount()} />
+//        <button onClick={this.addProduct}>Add a Product</button>
+//        <Cart
+//          products = {products}
+//          onIncreaseQuantity={this.handleIncreaseQuantity}
+//          onDecreaseQuantity={this.handleDecreaseQuantity}
+//          onDeleteProduct={this.handleDeleteProduct}
+//        />
+//        {loading && <h1>Loading Products</h1> }
+//         <div className="Total-amount">        {/* <div  style={{fontSize: 20, color:'blue',padding: 10, border:1  , padding:10 }}> */}
+//         TOTAL : {this.getCartTotal()}
+//        </div>
+//       </div>
+//     );
+//   }
+
+  
+// }
+// export default App;
+
+
+
+import React from 'react';
 import Cart from './Cart';
 import Navbar from './Navbar';
+//import * as firebase from 'firebase';
+import {
+  doc,
+  addDoc,
+  setDoc,
+  collection,
+  updateDoc,
+  deleteDoc,
+  onSnapshot,
+  query,
+  where,
+  orderBy,
+  // doc,
+} from "firebase/firestore";
+import { db } from "./index";
+
 
 class App extends React.Component {
   constructor() {
     super(); // this is used here because the constructor need to be called inside so that is ue super
     this.state = {
-        products:[
-            {
-                price: 99,
-                title:'Watch',
-                qty:1,
-                img: 'https://www.cnet.com/a/img/resize/0eeb48a577c1a545e79608c8ff3a39e6d5636cc1/hub/2020/08/01/79cf1165-834b-4079-b15a-c73921970368/apple-watch-5-4758.jpg?auto=webp&fit=crop&height=675&width=1200',
-                id:1
-            },
-            {
-                price: 999,
-                title:'Mobile Phone',
-                qty:10,
-                img: 'https://d2d22nphq0yz8t.cloudfront.net/88e6cc4b-eaa1-4053-af65-563d88ba8b26/https://media.croma.com/image/upload/v1662655033/Croma%20Assets/Communication/Mobiles/Images/261983_ppxi5n.png/mxw_2048,f_auto',
-                id:2
-            },
-            {
-                price: 999,
-                title:'Laptop',
-                qty:4,
-                img: 'https://www.cnet.com/a/img/resize/c6bca3de2b9a296c19bf62f0c666d9ec6ba5fcdd/hub/2021/10/23/91f7ed14-0d9c-4cba-9715-3e50ef822252/macbook-pro-2021-cnet-review-14.jpg?auto=webp&fit=crop&height=675&width=1200',
-                id:3
-            },
-            
-        ]
+      products: [],
+      loading: true
     }
-    //this.increaseQuantity = this.increaseQuantity.bind(this);
-    //this.testing();
-}
+  }
 
-handleIncreaseQuantity = (product) => {
-    console.log('hey please inc the qty of ',product);
-    const { products } = this.state;
+  async componentDidMount() {
+    //this is a realtime listener if you change anything in firebase ui will automatically updated 
+    const q = query(
+      collection(db, "products"),
+      where("price", ">", 0),
+      orderBy("price")
+    );
+    const unsub = await onSnapshot(q, (querySnapshot) => {
+      const getProducts = [];
+      querySnapshot.forEach((doc) => {
+        const product = doc.data();
+        product.id = doc.id;
+        getProducts.push(product);
+      });
+      console.log(getProducts);
+      this.setState({ products: getProducts, loading: false });
+    });
+  }
+
+  handleIncreaseQuantity = async (product) => {
+    let { products } = this.state;
     const index = products.indexOf(product);
 
-    products[index].qty += 1;
+    const docRef = doc(collection(db, "products"), products[index].id);
+    await updateDoc(docRef, {
+      qty: products[index].qty + 1,
+    });
+  };
 
-    this.setState({
-        products
-    })
-}
-
-
-handleDecreaseQuantity = (product) => {
-    console.log('hey please inc the qty of ',product);
-    const { products } = this.state;
+  handleDecreaseQuantity = async (product) => {
+    let { products } = this.state;
     const index = products.indexOf(product);
-    if(products[index].qty === 0) {
-        return;
+    if (products[index].qty !== 0) {
+      const docRef = doc(collection(db, "products"), products[index].id);
+      await updateDoc(docRef, {
+        qty: products[index].qty - 1,
+      });
     }
-    products[index].qty -= 1;
+  };
 
-    this.setState({
-        products
-    })
-}
-handleDeleteProduct = (id) => {
+
+  handleDeleteProduct = (productToDelete) => {
+    const docRef = doc(collection(db, "products"), productToDelete);
+    deleteDoc(docRef)
+      .then(() => {
+        console.log("product deleted");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  getCartCount = () => {
+
     const { products } = this.state;
-    const items = products.filter((item) => item.id !==id); //[{}]
-
-    this.setState({
-        products : items
+    let count = 0;
+    products.forEach((product) => {
+      count += product.qty;
     })
-}
-getCartCount =() => {
+    return count;
+  }
+  getCartTotal = () => {
+    const { products } = this.state;
+    let cartTotal = 0;
+    products.map(product => {
+      if (product.qty > 0) {
+        cartTotal = cartTotal + product.qty * product.price;
+      }
+      return '';
 
-  const {products} = this.state;
-  let count = 0;
-  
-  
+    });
 
-  products.forEach((product) => {
-    count += product.qty;
-  })
-  return count ;
-}
-getCartTotal = () => {
-  const {products} = this.state;
-  let cartTotal = 0;
-  products.map((product) => {
-    cartTotal = cartTotal + product.qty * product.price 
-  })
+    return cartTotal;
+  }
 
-  return cartTotal;
-}
-  
+
+  addProduct = async () => {
+    const docRef = await addDoc(collection(db, "products"), {
+      img: "https://www.ifbappliances.com/media/catalog/product/cache/f6d60de4095a6e5204f81c04aa5b766f/e/x/executive_mxs_id_1014_front300.png",
+      price: 900,
+      qty: 2,
+      title: "Washing Machine"
+    })
+      .then((docRef) => {
+        console.log("product added" + docRef);
+      })
+      .catch((err) => {
+        console.log("Error : ", err);
+      });
+  };
+
+
+
   render() {
 
-    const { products } = this.state;
+    const { products, loading } = this.state;
     return (
-     <div className="App">
-       <Navbar count={this.getCartCount()} />
-       <Cart
-         products = {products}
-         onIncreaseQuantity={this.handleIncreaseQuantity}
-         onDecreaseQuantity={this.handleDecreaseQuantity}
-         onDeleteProduct={this.handleDeleteProduct}
-       />
-       <div  style={{fontSize: 20, color:'blue',padding: 10, border:1  , padding:10 }}>
-        TOTAL : {this.getCartTotal()}
-       </div>
+      <div className="App">
+        <Navbar count={this.getCartCount()} />
+        {/* <button onClick={this.addProduct}>Add a Product</button> */}
+        <Cart
+          products={products}
+          onIncreaseQuantity={this.handleIncreaseQuantity}
+          onDecreaseQuantity={this.handleDecreaseQuantity}
+          onDeleteProduct={this.handleDeleteProduct}
+        />
+        {loading && <h1>Loading Products</h1>}
+        <div className="Total-amount">        {/* <div  style={{fontSize: 20, color:'blue',padding: 10, border:1  , padding:10 }}> */}
+          TOTAL : {this.getCartTotal()}
+        </div>
       </div>
     );
   }
 
-  
+
 }
 export default App;
+
