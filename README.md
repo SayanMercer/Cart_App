@@ -1,5 +1,5 @@
 
-This is a Shopping Cart App.The app is created using React Js. You can add items in the cart.The app has 5 main features Adding, Subtracting  , Deleting , Cart items and Total Amount. By clicking each signs you can experience all the functionalities which are present in the app.
+This is a Shopping Cart App.The app is created using React Js and the Backend is supported by Firebase. You can add items in the cart.The app has 5 main features Adding, Subtracting  , Deleting , Cart items and Total Amount. By clicking each signs you can experience all the functionalities which are present in the app.
 
 ### `npm start`
 
