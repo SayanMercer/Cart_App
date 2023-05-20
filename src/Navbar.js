@@ -18,30 +18,32 @@ const styles = {
   cartIcon: {
     height: 32,
     marginRight: 20,
-    filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2))', /* Added a drop shadow effect to the cart icon */
+    
+    filter: 'drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2))', 
   },
   nav: {
     height: 70,
-    background: 'linear-gradient(to right, #FFC371, #FF5F6D)', /* Applied a gradient background with vibrant colors */
+    background: 'linear-gradient(to right, #FFC371, #FF5F6D)', 
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    padding: '0 20px', /* Added padding for better spacing */
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' /* Added a slightly stronger shadow effect */
+    padding: '0 20px', 
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' 
   },
   cartIconContainer: {
     position: 'relative'
   },
   cartCount: {
-    background: 'linear-gradient(to right, #8B78E6, #FC7D7B)', /* Changed the background to a gradient with contrasting colors */
+    background: 'linear-gradient(to right, #8B78E6, #FC7D7B)', 
     borderRadius: '50%',
     padding: '4px 8px',
     position: 'absolute',
-    right: -10, /* Adjusted the position to align better with the cart icon */
+    right: -10, 
     top: -10,
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' /* Added a subtle shadow effect to the cart count */
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)' 
   }
 };
+
 
 export default Navbar;
 
