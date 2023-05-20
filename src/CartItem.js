@@ -53,13 +53,18 @@ const CartItem = (props) => {
   }
 
 //Object of java script
+
 const styles = {
   image: {
     height: 110,
     width: 110,
-    borderRadius: 4,
-    background: '#ccc'
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #FFDD00, #FF5F6D, #2E80FF, #8B78E6)', /* Applied a multi-color gradient background */
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', /* Added a shadow effect */
+    transform: 'rotate(45deg)', /* Rotated the image by 45 degrees */
+    border: '2px solid #FFF' /* Added a white border */
   }
-}
+};
+
 
 export default CartItem;
